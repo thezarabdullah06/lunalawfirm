@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detail Bidang Praktik | Wijaya &amp; Rekan</title><meta id="metaDesc" name="description" content="Detail bidang praktik.">
+<link rel="canonical" href="bidang-praktik-detail.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><div id="content"></div>
+<div id="faq-wrap" style="margin-top:28px"></div>
+<div id="lawyers" style="margin-top:28px"></div>
+<div class="card" style="margin-top:28px;background:var(--navy);color:#fff" id="cta">
+<h3 style="color:#fff;margin:0 0 6px">Perkara Anda termasuk bidang ini?</h3>
+<p style="color:#B9C4D6;margin:0 0 16px">Konsultasi awal 30–45 menit, bidang terisi otomatis. Tanpa komitmen.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" id="ctaConsult">Jadwalkan Konsultasi <i data-lucide="arrow-right"></i></a><a class="btn btn-light" id="ctaWa" target="_blank" rel="noopener">WhatsApp</a></div>
+</div></main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+(function(){
+const p = window.__PRACTICE_BY_SLUG[window.__PARAM.get('slug')];
+if(!p){ document.getElementById('content').innerHTML='<div class="alert-err">Bidang praktik tidak ditemukan. <a href="bidang-praktik.html">Kembali ke indeks</a></div>'; return; }
+document.title = window.t(p.name) + ' | Wijaya & Rekan';
+document.getElementById('crumb').innerHTML = crumb([{label:'Beranda',href:'index.html'},{label:'Bidang Praktik',href:'bidang-praktik.html'},{label:window.t(p.name)}]);
+document.getElementById('content').innerHTML = `
+<p class="eyebrow">${window.t(p.name)}</p><h1 style="font-size:40px;margin:0 0 10px">${window.t(p.name)}</h1>
+<p class="lede">${window.t(p.short)}</p>
+<div class="card" style="margin-top:18px"><h3>Masalah yang kami tangani</h3><p class="meta">${window.t(p.problem)}</p></div>
+<h2 style="margin-top:28px">Ruang Lingkup Layanan</h2><div class="grid g2">${p.scope.map(s=>`<div class="card" style="display:flex;gap:12px"><i data-lucide="check-circle-2" style="color:var(--success);flex-shrink:0"></i><div>${s}</div></div>`).join('')}</div>
+<div class="form-note" style="margin-top:22px"><strong>${p.illustration.title}</strong><br>${p.illustration.text}</div>
+<h2 style="margin-top:28px">Alur Kerja</h2><div class="grid g3">${p.workflow.map((w,i)=>`<div class="card step"><span class="step-num">${i+1}</span><div><strong>${w}</strong></div></div>`).join('')}</div>`;
+document.getElementById('faq-wrap').innerHTML = '<h2>Pertanyaan Umum</h2>' + p.faq.map(f=>`<div class="faq-item"><button class="faq-q" onclick="this.nextElementSibling.classList.toggle('open')">${f.q} <i data-lucide="chevron-down"></i></button><div class="faq-a">${f.a}</div></div>`).join('');
+const related = p.lawyerSlugs.map(s=>window.__LAWYER_BY_SLUG[s]).filter(Boolean);
+document.getElementById('lawyers').innerHTML = '<h2>Advokat Penanggung Jawab</h2><div class="grid g3">' + related.map(l=>`<article class="card"><div style="display:flex;gap:12px;align-items:center"><span class="avatar">${l.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</span><div><strong>${l.name}</strong><div class="meta">${l.role}</div></div></div><div style="margin-top:12px"><a class="btn btn-navy" style="padding:9px 16px;font-size:14px" href="tim-advokat-detail.html?slug=${l.slug}">${T('view.profile')}</a></div></article>`).join('') + '</div>';
+document.getElementById('ctaConsult').href = 'konsultasi.html?bidang=' + p.slug;
+document.getElementById('ctaWa').href = window.__WA('Halo Wijaya & Rekan, saya tertarik dengan layanan ' + window.t(p.name) + '. ');
+lucide.createIcons();
+})();
+</script></body></html>

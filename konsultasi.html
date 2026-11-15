@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jadwalkan Konsultasi | Wijaya &amp; Rekan</title><meta name="description" content="Formulir penjadwalan konsultasi hukum dengan persetujuan UU PDP.">
+<link rel="canonical" href="konsultasi.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><p class="eyebrow">Penjadwalan Konsultasi</p>
+<h1 style="font-size:40px;margin:0 0 12px">Jadwalkan konsultasi Anda.</h1>
+<p class="lede">Tiga langkah yang jelas: pengajuan &amp; conflict check, sesi konsultasi 30–45 menit, lalu proposal biaya tertulis (engagement letter).</p>
+<div class="grid g3" id="steps" style="margin-top:24px">
+<div class="card step"><span class="step-num">1</span><div><strong>Pengajuan &amp; Conflict Check</strong><p class="meta">Kami memeriksa benturan kepentingan. Jangan mengunggah dokumen rahasia sebelum proses ini selesai.</p></div></div>
+<div class="card step"><span class="step-num">2</span><div><strong>Sesi Konsultasi (30–45 menit)</strong><p class="meta">Evaluasi objektif atas posisi hukum Anda, tanpa janji kemenangan perkara.</p></div></div>
+<div class="card step"><span class="step-num">3</span><div><strong>Proposal Biaya</strong><p class="meta">Engagement letter tertulis dengan ruang lingkup dan biaya transparan.</p></div></div>
+</div>
+<div class="divider"></div>
+<div id="formWrap" class="card" style="max-width:760px;margin:0 auto">
+<form id="consult" novalidate>
+<div style="margin-bottom:16px"><label for="bidang">Bidang Praktik</label><select id="bidang" required></select></div>
+<div style="margin-bottom:16px"><label>Kategori Klien</label><div style="display:flex;gap:12px;flex-wrap:wrap"><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="radio" name="kategori" value="Perusahaan" style="width:auto;min-height:auto" checked> Perusahaan</label><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="radio" name="kategori" value="Individu" style="width:auto;min-height:auto"> Individu</label></div></div>
+<div style="margin-bottom:16px"><label>Metode Pertemuan</label><div style="display:flex;gap:16px;flex-wrap:wrap"><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="radio" name="meeting" value="Kantor" style="width:auto;min-height:auto" checked> Tatap Muka</label><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="radio" name="meeting" value="Video Call" style="width:auto;min-height:auto"> Video Call</label><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="radio" name="meeting" value="Telepon" style="width:auto;min-height:auto"> Telepon</label></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+<div><label for="tanggal">Tanggal (WIB)</label><input type="date" id="tanggal" required></div>
+<div><label for="slot">Slot Waktu (WIB)</label><select id="slot" required><option value="">Pilih slot</option><option>09.00–09.45</option><option>10.00–10.45</option><option>13.00–13.45</option><option>14.00–14.45</option><option>15.00–15.45</option><option>16.00–16.45</option></select></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+<div><label for="nama">Nama Lengkap</label><input id="nama" required autocomplete="name"></div>
+<div><label for="email">Email</label><input type="email" id="email" required autocomplete="email"></div>
+</div>
+<div style="margin-bottom:16px"><label for="wa">Nomor WhatsApp</label><input id="wa" required inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx"></div>
+<div style="margin-bottom:16px"><label for="topik">Ringkasan Topik (non-rahasia, maks. 400 karakter)</label><textarea id="topik" maxlength="400" rows="4" placeholder="Ceritakan singkat persoalan Anda tanpa detail rahasia…"></textarea><small class="meta" id="count">0 / 400</small></div>
+<div class="form-note" style="margin-bottom:16px"><strong>Peringatan Kerahasiaan:</strong> Mohon TIDAK mengunggah atau menuliskan dokumen rahasia, nomor identitas lengkap, atau data sensitif pada formulir ini. Kerahasiaan penuh dilindungi setelah conflict check dan penandatanganan NDA.</div>
+<label style="display:flex;gap:10px;align-items:flex-start;font-weight:600"><input type="checkbox" id="pdp" style="width:auto;min-height:auto;margin-top:4px" required><span>Saya menyetujui pemrosesan data pribadi saya sesuai <a href="kebijakan-privasi.html">Kebijakan Privasi</a> dan UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP). Data disimpan maksimal 12 bulan dan hanya digunakan untuk penjadwalan.</span></label>
+<div id="err" class="alert-err" style="display:none;margin-top:14px">Lengkapi seluruh kolom wajib dan centang persetujuan UU PDP.</div>
+<button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px" type="submit">Kirim Pengajuan <i data-lucide="send"></i></button>
+</form></div>
+<div id="confirm" class="alert-ok" style="display:none;max-width:760px;margin:0 auto">
+<h3 style="margin-top:0">Pengajuan terkirim. Nomor referensi Anda:</h3>
+<p style="font-size:28px;font-weight:900;letter-spacing:.04em" id="ref">WR-2026-0000</p>
+<p id="summary" class="meta"></p>
+<a class="btn btn-green" id="waConfirm" target="_blank" rel="noopener">Konfirmasi Cepat via WhatsApp <i data-lucide="message-circle"></i></a>
+<p class="meta" style="margin-top:12px">Kami akan menghubungi Anda maks. 1 hari kerja untuk konfirmasi conflict check.</p>
+<a href="index.html" style="font-weight:700;color:var(--bronze-dark)">Kembali ke Beranda</a></div>
+</main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+(function(){
+document.getElementById('crumb').innerHTML=crumb([{label:'Beranda',href:'index.html'},{label:'Konsultasi'}]);
+const sel=document.getElementById('bidang');
+sel.innerHTML='<option value="">Pilih bidang praktik</option>'+FIRM_DATA.practices.map(p=>`<option value="${p.slug}">${window.t(p.name)}</option>`).join('')+'<option value="lainnya">Lainnya / Belum Tahu</option>';
+const param=window.__PARAM.get('bidang'); if(param&&window.__PRACTICE_BY_SLUG[param]) sel.value=param;
+document.getElementById('tanggal').min=new Date().toISOString().split('T')[0];
+document.getElementById('topik').addEventListener('input',e=>document.getElementById('count').textContent=e.target.value.length+' / 400');
+document.getElementById('consult').addEventListener('submit',e=>{
+ e.preventDefault();
+ const ok = sel.value && document.getElementById('tanggal').value && document.getElementById('slot').value && document.getElementById('nama').value.trim() && document.getElementById('email').value.trim() && document.getElementById('wa').value.trim() && document.getElementById('pdp').checked;
+ document.getElementById('err').style.display = ok ? 'none' : 'block';
+ if(!ok) return;
+ const ref = 'WR-2026-' + Math.floor(1000 + Math.random()*9000);
+ const bidangLabel = sel.selectedOptions[0].textContent;
+ document.getElementById('ref').textContent = ref;
+ document.getElementById('summary').textContent = bidangLabel + ' • ' + document.getElementById('tanggal').value + ' ' + document.getElementById('slot').value + ' WIB • ' + document.querySelector('input[name="meeting"]:checked').value;
+ document.getElementById('waConfirm').href = window.__WA('Halo, saya ' + document.getElementById('nama').value + '. Nomor referensi saya ' + ref + ' untuk konsultasi ' + bidangLabel + ' pada ' + document.getElementById('tanggal').value + '. ');
+ document.getElementById('formWrap').style.display='none'; document.getElementById('confirm').style.display='block';
+ lucide.createIcons();
+});
+lucide.createIcons();
+})();
+</script></body></html>

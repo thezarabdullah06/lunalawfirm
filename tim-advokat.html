@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tim Advokat | Wijaya &amp; Rekan</title><meta name="description" content="Direktori advokat Wijaya & Rekan dengan nomor PERADI dan bidang keahlian.">
+<link rel="canonical" href="tim-advokat.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><p class="eyebrow">Tim Advokat</p>
+<h1 style="font-size:40px;margin:0 0 12px">Direktori advokat berlisensi PERADI.</h1>
+<p class="lede">Filter berdasarkan jabatan dan bidang praktik. Seluruh advokat terdaftar di Perhimpunan Advokat Indonesia (PERADI).</p>
+<div class="chip-nav" id="roleFilter">
+<button data-role="all" class="on" onclick="setRole('all',this)">Semua</button>
+<button data-role="Partner" onclick="setRole('Partner',this)">Partner</button>
+<button data-role="Associate" onclick="setRole('Associate',this)">Associate</button>
+</div>
+<div class="chip-nav" id="practiceFilter"></div>
+<div id="grid" class="grid g3"></div>
+<div id="empty" class="alert-err" style="display:none">Tidak ada advokat yang cocok dengan filter ini.</div>
+</main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+let role='all', prac='all';
+const F = window.FIRM_DATA;
+const pf = document.getElementById('practiceFilter');
+pf.innerHTML = '<button class="on" data-p="all" onclick="setPrac(\'all\',this)">'+T('filter.all')+'</button>' + F.practices.map(p=>`<button data-p="${p.slug}" onclick="setPrac('${p.slug}',this)">${window.t(p.name)}</button>`).join('');
+function render(){
+  const list = F.lawyers.filter(l=>(role==='all'||l.role.includes(role))&&(prac==='all'||l.practices.includes(prac)));
+  document.getElementById('grid').innerHTML = list.map(l=>`<article class="card"><div style="display:flex;gap:12px;align-items:center"><span class="avatar">${l.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</span><div><strong>${l.name}</strong><div class="meta">${l.role}<br>PERADI ${l.peradi}</div></div></div><div class="tags" style="margin-top:12px">${l.practices.map(s=>`<a class="pill" href="bidang-praktik-detail.html?slug=${s}" style="text-decoration:none">${window.t(window.__PRACTICE_BY_SLUG[s].name)}</a>`).join('')}</div><div style="margin-top:12px"><a class="btn btn-navy" style="padding:9px 16px;font-size:14px" href="tim-advokat-detail.html?slug=${l.slug}">${T('view.profile')}</a></div></article>`).join('');
+  document.getElementById('empty').style.display = list.length?'none':'block';
+  lucide.createIcons();
+}
+function setRole(r,btn){ role=r; document.querySelectorAll('#roleFilter button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); render(); }
+function setPrac(p,btn){ prac=p; document.querySelectorAll('#practiceFilter button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); render(); }
+document.getElementById('crumb').innerHTML=crumb([{label:'Beranda',href:'index.html'},{label:'Tim Advokat'}]);
+if(window.__PARAM.get('bidang')){ prac=window.__PARAM.get('bidang'); }
+render(); lucide.createIcons();
+</script></body></html>

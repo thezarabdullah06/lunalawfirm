@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karier | Wijaya &amp; Rekan</title><meta name="description" content="Budaya kerja dan lowongan Associate serta Magang PKPA di Wijaya & Rekan.">
+<link rel="canonical" href="karier.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><p class="eyebrow">Karier</p>
+<h1 style="font-size:40px;margin:0 0 12px">Bergabung dengan tim kami.</h1>
+<p class="lede">Budaya kerja: evaluasi objektif, mentor pendampingan, pelatihan legal research berkala, dan penghargaan atas ketelitian bukan sekadar kecepatan.</p>
+<div id="jobs" class="grid g2" style="margin-top:24px"></div>
+<div class="card" style="max-width:760px;margin:28px auto 0"><h3>Formulir Lamaran (Unggah CV PDF, maks. 5 MB)</h3>
+<form id="jobForm" novalidate style="margin-top:14px">
+<div style="margin-bottom:14px"><label for="posisi">Posisi yang Dilamar</label><select id="posisi" required></select></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px"><div><label for="jNama">Nama</label><input id="jNama" required></div><div><label for="jEmail">Email</label><input type="email" id="jEmail" required></div></div>
+<div style="margin-bottom:14px"><label for="jCv">CV (PDF, maks. 5 MB)</label><input type="file" id="jCv" accept=".pdf" required></div>
+<label style="display:flex;gap:10px;align-items:flex-start;font-weight:600"><input type="checkbox" id="jPdp" style="width:auto;min-height:auto;margin-top:4px" required><span>Saya menyetujui pemrosesan data lamaran sesuai <a href="kebijakan-privasi.html">Kebijakan Privasi</a> (UU PDP).</span></label>
+<div id="jobErr" class="alert-err" style="display:none;margin-top:12px">Lengkapi semua kolom dan pastikan CV berformat PDF ≤ 5 MB.</div>
+<div id="jobOk" class="alert-ok" style="display:none;margin-top:12px">Lamaran terkirim. Tim HRD akan menghubungi maksimal 7 hari kerja.</div>
+<button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:14px" type="submit">Kirim Lamaran</button>
+</form></div></main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+document.getElementById('crumb').innerHTML=crumb([{label:'Beranda',href:'index.html'},{label:'Karier'}]);
+document.getElementById('jobs').innerHTML=FIRM_DATA.jobs.map(j=>`<article class="card"><h3 style="margin:0 0 6px">${j.title}</h3><span class="pill">${j.type}</span><ul style="margin:14px 0 0;padding-left:20px">${j.req.map(r=>`<li>${r}</li>`).join('')}</ul><a class="btn btn-navy" style="margin-top:16px;padding:9px 16px;font-size:14px" href="#apply" onclick="document.getElementById('posisi').value='${j.id}';">Lamar Sekarang</a></article>`).join('');
+document.getElementById('posisi').innerHTML='<option value="">Pilih posisi</option>'+FIRM_DATA.jobs.map(j=>`<option value="${j.id}">${j.title}</option>`).join('');
+document.getElementById('jobForm').addEventListener('submit',e=>{e.preventDefault();
+const cv=document.getElementById('jCv').files[0];
+const ok=document.getElementById('posisi').value&&document.getElementById('jNama').value.trim()&&document.getElementById('jEmail').value.trim()&&document.getElementById('jPdp').checked&&cv&&cv.type==='application/pdf'&&cv.size<=5*1024*1024;
+document.getElementById('jobErr').style.display=ok?'none':'block';document.getElementById('jobOk').style.display=ok?'block':'none';});
+lucide.createIcons();
+</script></body></html>

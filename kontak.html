@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontak &amp; Lokasi | Wijaya &amp; Rekan</title><meta name="description" content="Alamat, jam operasional, dan formulir pesan umum Wijaya & Rekan.">
+<link rel="canonical" href="kontak.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><p class="eyebrow">Kontak &amp; Lokasi</p>
+<h1 style="font-size:40px;margin:0 0 12px">Kunjungi kantor kami.</h1>
+<div class="grid g2">
+<div class="card"><h3><i data-lucide="map-pin" style="color:var(--bronze)"></i> Alamat Kantor Pusat</h3><p class="meta">Menara Sudirman Lt. 18, Jl. Jenderal Sudirman Kav. 52–53, Jakarta Selatan 12190</p>
+<p class="meta"><strong>Jam Operasional:</strong> Senin–Jumat 09.00–18.00 WIB</p>
+<p class="meta"><strong>Telepon:</strong> +62 21 5080 2288<br><strong>WhatsApp Bisnis:</strong> +62 812-3456-7890<br><strong>Email Sekretariat:</strong> <a href="mailto:sekretariat@wijayarekan.id">sekretariat@wijayarekan.id</a><br><strong>Email Media:</strong> <a href="mailto:media@wijayarekan.id">media@wijayarekan.id</a></p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><a class="btn btn-navy" href="https://www.google.com/maps/search/?api=1&query=Jl.+Jenderal+Sudirman+Kav.+52-53+Jakarta+Selatan" target="_blank" rel="noopener"><i data-lucide="navigation"></i> Petunjuk Arah</a><a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/6281234567890?text=Halo%20Wijaya%20%26%20Rekan%2C%20saya%20ingin%20bertanya."><i data-lucide="message-circle"></i> WhatsApp Bisnis</a></div>
+<iframe title="Peta lokasi kantor" src="https://www.openstreetmap.org/export/embed.html?bbox=106.8180%2C-6.2244%2C106.8380%2C-6.2114&layer=mapnik&marker=-6.2179%2C106.8280" style="width:100%;height:280px;border:1px solid var(--line);border-radius:12px;margin-top:16px" loading="lazy"></iframe>
+</div>
+<div class="card"><h3><i data-lucide="mail" style="color:var(--bronze)"></i> Pesan Umum (Non-Konsultasi)</h3><p class="meta">Untuk undangan narasumber media, kerja sama, dan pertanyaan umum. Bukan untuk perkara hukum — gunakan <a href="konsultasi.html">formulir konsultasi</a>.</p>
+<form id="msgForm" novalidate style="margin-top:16px">
+<div style="margin-bottom:14px"><label for="mNama">Nama</label><input id="mNama" required></div>
+<div style="margin-bottom:14px"><label for="mEmail">Email</label><input type="email" id="mEmail" required></div>
+<div style="margin-bottom:14px"><label for="mPesan">Pesan</label><textarea id="mPesan" rows="4" required></textarea></div>
+<label style="display:flex;gap:10px;align-items:flex-start;font-weight:600"><input type="checkbox" id="mPdp" style="width:auto;min-height:auto;margin-top:4px" required><span>Saya menyetujui pemrosesan data sesuai <a href="kebijakan-privasi.html">Kebijakan Privasi</a> (UU PDP).</span></label>
+<div id="msgErr" class="alert-err" style="display:none;margin-top:12px">Lengkapi formulir dan centang persetujuan.</div>
+<div id="msgOk" class="alert-ok" style="display:none;margin-top:12px">Pesan terkirim. Sekretariat kami akan membalas maks. 1 hari kerja.</div>
+<button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:14px" type="submit">Kirim Pesan</button>
+</form></div></div></main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+document.getElementById('crumb').innerHTML=crumb([{label:'Beranda',href:'index.html'},{label:'Kontak'}]);
+document.getElementById('msgForm').addEventListener('submit',e=>{e.preventDefault();
+const ok=document.getElementById('mNama').value.trim()&&document.getElementById('mEmail').value.trim()&&document.getElementById('mPesan').value.trim()&&document.getElementById('mPdp').checked;
+document.getElementById('msgErr').style.display=ok?'none':'block';document.getElementById('msgOk').style.display=ok?'block':'none';});
+lucide.createIcons();
+</script></body></html>

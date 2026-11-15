@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artikel Hukum | Wijaya &amp; Rekan</title><meta name="description" content="Indeks artikel hukum yang ditinjau Partner, dengan pencarian dan filter kategori.">
+<link rel="canonical" href="artikel.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><p class="eyebrow">Artikel Hukum</p>
+<h1 style="font-size:40px;margin:0 0 12px">Edukasi hukum, ditinjau Partner.</h1>
+<p class="lede">Seluruh artikel ditinjau oleh Partner sebelum diterbitkan dan memuat disclaimer edukasi umum.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:20px 0">
+<div style="flex:1;min-width:260px"><input id="q" type="search" placeholder="Cari artikel hukum…" oninput="render()" aria-label="Cari artikel"></div>
+<select id="cat" onchange="render()" aria-label="Kategori" style="width:auto;min-width:220px">
+<option value="all">Semua Kategori</option>
+</select></div>
+<div id="grid" class="grid g3"></div>
+<div class="chip-nav" id="pager" style="margin-top:24px"></div>
+</main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+let page = 1; const PER = 6;
+document.getElementById('cat').innerHTML = '<option value="all">Semua Kategori</option>' + FIRM_DATA.practices.map(p=>`<option value="${p.slug}">${window.t(p.name)}</option>`).join('');
+function render(){
+ const q = document.getElementById('q').value.toLowerCase(), cat = document.getElementById('cat').value;
+ const list = FIRM_DATA.articles.filter(a=>(cat==='all'||a.category===cat)&&(a.title.toLowerCase().includes(q)||a.excerpt.toLowerCase().includes(q)));
+ const total = Math.max(1, Math.ceil(list.length/PER)); if(page>total) page=total;
+ const slice = list.slice((page-1)*PER, page*PER);
+ document.getElementById('grid').innerHTML = slice.map(a=>{const au=window.__LAWYER_BY_SLUG[a.author];return `<article class="card"><span class="pill review">Ditinjau oleh Partner</span><h3 style="font-size:20px;margin:10px 0 6px">${a.title}</h3><p class="meta">${a.excerpt}</p><div class="meta" style="margin:10px 0">Penulis: ${au?au.name:''}<br>${new Date(a.date).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})} • ${a.read}</div><a class="btn btn-navy" style="padding:9px 16px;font-size:14px" href="artikel-detail.html?slug=${a.slug}">${T('read.more')}</a></article>`;}).join('') || '<div class="alert-err">'+T('empty')+'</div>';
+ document.getElementById('pager').innerHTML = Array.from({length:total},(_,i)=>`<button class="${i+1===page?'on':''}" onclick="page=${i+1};render()">Halaman ${i+1}</button>`).join('');
+ lucide.createIcons();
+}
+document.getElementById('crumb').innerHTML=crumb([{label:'Beranda',href:'index.html'},{label:'Artikel'}]);
+render();
+</script></body></html>

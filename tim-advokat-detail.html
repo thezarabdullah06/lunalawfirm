@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profil Advokat | Wijaya &amp; Rekan</title><meta name="description" content="Biodata advokat: nomor PERADI, pendidikan, bahasa, bidang praktik, dan artikel.">
+<link rel="canonical" href="tim-advokat-detail.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><div id="content"></div></main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+(function(){
+const l = window.__LAWYER_BY_SLUG[window.__PARAM.get('slug')];
+if(!l){ document.getElementById('content').innerHTML='<div class="alert-err">Profil tidak ditemukan. <a href="tim-advokat.html">Kembali ke direktori</a></div>'; return; }
+document.title = l.name + ' | Wijaya & Rekan';
+document.getElementById('crumb').innerHTML = crumb([{label:'Beranda',href:'index.html'},{label:'Tim Advokat',href:'tim-advokat.html'},{label:l.name}]);
+const articles = FIRM_DATA.articles.filter(a=>a.author===l.slug||a.reviewer===l.slug);
+document.getElementById('content').innerHTML = `
+<div class="card"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="avatar" style="width:88px;height:88px;font-size:32px">${l.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</span>
+<div style="flex:1;min-width:240px"><h1 style="font-size:34px;margin:0">${l.name}</h1><p class="meta">${l.role} • PERADI ${l.peradi}</p>
+<div class="tags"><span class="pill">Bahasa: ${l.languages}</span><span class="pill">PERADI ${l.peradi}</span></div></div>
+<a class="btn btn-primary" href="konsultasi.html?bidang=${l.practices[0]}">Jadwalkan Konsultasi</a></div></div>
+<div class="divider"></div>
+<h2>Biodata</h2><p class="meta">${l.bio}</p>
+<h3 style="margin-top:20px">Pendidikan</h3><ul>${l.education.map(e=>`<li>${e}</li>`).join('')}</ul>
+<h3 style="margin-top:20px">Bahasa yang Dikuasai</h3><p class="meta">${l.languages}</p>
+<h3 style="margin-top:20px">Bidang Praktik</h3><div class="tags">${l.practices.map(s=>`<a class="pill" href="bidang-praktik-detail.html?slug=${s}" style="text-decoration:none">${window.t(window.__PRACTICE_BY_SLUG[s].name)}</a>`).join('')}</div>
+<h3 style="margin-top:20px">Artikel Ditulis / Ditinjau</h3>
+${articles.length? articles.map(a=>`<div class="card" style="margin-bottom:12px"><strong>${a.title}</strong><div class="meta">${new Date(a.date).toLocaleDateString('id-ID')} ${a.author===l.slug?'• Penulis':'• Peninjau'}</div><a href="artikel-detail.html?slug=${a.slug}" style="color:var(--bronze-dark);font-weight:700">Baca artikel →</a></div>`).join('') : '<p class="meta">Belum ada publikasi.</p>'}
+<div class="card" style="margin-top:22px;background:var(--ivory-2)"><p style="margin:0">Keanggotaan: <strong>${FIRM_DATA.firm.peradi}</strong>. Profil ini bersifat informatif dan tidak memuat janji kemenangan perkara.</p></div>`;
+lucide.createIcons();
+})();
+</script></body></html>

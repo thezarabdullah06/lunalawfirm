@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bidang Praktik | Wijaya &amp; Rekan</title><meta name="description" content="Indeks lima bidang praktik Wijaya & Rekan: korporasi, litigasi, ketenagakerjaan, keluarga-waris, pertanahan.">
+<link rel="canonical" href="bidang-praktik.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" class="wrap section">
+<div id="crumb"></div><p class="eyebrow">Bidang Praktik</p>
+<h1 style="font-size:40px;margin:0 0 12px">Lima bidang praktik, dipilih sesuai kebutuhan Anda.</h1>
+<p class="lede">Pilih bidang yang paling dekat dengan persoalan Anda. Setiap halaman detail memuat ruang lingkup, ilustrasi kasus anonim, alur kerja 3–4 tahap, FAQ, dan advokat penanggung jawab.</p>
+<div id="grid" class="grid g5" style="margin-top:28px"></div>
+<div class="card" style="margin-top:28px;background:var(--ivory-2)"><h3>Panduan memilih layanan</h3>
+<ol style="margin:0;padding-left:22px"><li>Tentukan sifat persoalan: kontrak/perusahaan, sengketa pengadilan, hubungan kerja, keluarga, atau tanah.</li><li>Buka halaman bidangnya dan periksa ilustrasi kasus anonimnya.</li><li>Jadwalkan konsultasi — bidang akan terisi otomatis dari halaman tersebut.</li></ol></div>
+</main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+document.getElementById('crumb').innerHTML=crumb([{label:'Beranda',href:'index.html'},{label:'Bidang Praktik'}]);
+document.getElementById('grid').innerHTML=FIRM_DATA.practices.map(p=>`<a href="bidang-praktik-detail.html?slug=${p.slug}" class="card" style="text-decoration:none;display:block"><i data-lucide="${p.icon}" style="color:var(--bronze);width:28px;height:28px"></i><h3 style="margin:10px 0 6px;font-size:20px">${window.t(p.name)}</h3><p class="meta" style="font-size:14px">${window.t(p.short)}</p><span style="font-weight:700;color:var(--bronze-dark);font-size:14px">Lihat detail →</span></a>`).join('');
+lucide.createIcons();
+</script></body></html>

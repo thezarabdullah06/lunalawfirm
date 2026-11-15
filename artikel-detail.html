@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baca Artikel | Wijaya &amp; Rekan</title><meta name="description" content="Artikel hukum lengkap dengan disclaimer edukasi umum.">
+<link rel="canonical" href="artikel-detail.html"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head><body><div id="site-header"></div><main id="main" style="max-width:720px;margin:0 auto;padding:32px 20px">
+<div id="crumb"></div><div id="content"></div>
+<div id="related" style="margin-top:28px"></div>
+<div class="card" style="margin-top:22px;background:var(--navy);color:#fff">
+<h3 style="color:#fff;margin:0 0 6px">Punya persoalan mirip dengan artikel ini?</h3><p style="color:#B9C4D6;margin:0 0 14px">Konsultasikan secara gratis. Konteks artikel akan otomatis dicantumkan di WhatsApp.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" id="ctaConsult">Jadwalkan Konsultasi</a><a class="btn btn-light" id="ctaWa" target="_blank" rel="noopener">WhatsApp</a></div></div>
+</main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+(function(){
+const a = window.__ARTICLE_BY_SLUG[window.__PARAM.get('slug')];
+if(!a){ document.getElementById('content').innerHTML='<div class="alert-err">Artikel tidak ditemukan. <a href="artikel.html">Kembali ke indeks</a></div>'; return; }
+document.title = a.title + ' | Wijaya & Rekan';
+const au = window.__LAWYER_BY_SLUG[a.author], rv = window.__LAWYER_BY_SLUG[a.reviewer];
+document.getElementById('crumb').innerHTML = crumb([{label:'Beranda',href:'index.html'},{label:'Artikel',href:'artikel.html'},{label:'Baca Artikel'}]);
+document.getElementById('content').innerHTML = `
+<p class="eyebrow">${window.t(window.__PRACTICE_BY_SLUG[a.category].name)}</p>
+<h1 style="font-size:36px;margin:0 0 12px">${a.title}</h1>
+<div class="meta">Penulis: <a href="tim-advokat-detail.html?slug=${a.author}">${au?au.name:''}</a> • Diterbitkan ${new Date(a.date).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})} • ${a.read}</div>
+<div class="meta" style="margin-top:6px">Ditinjau oleh <a href="tim-advokat-detail.html?slug=${a.reviewer}">${rv?rv.name:''}</a> (Partner) • <span class="pill review">Ditinjau oleh Partner</span></div>
+<div class="form-note" style="margin:18px 0"><strong>Disclaimer:</strong> Artikel ini bersifat edukasi umum dan bukan nasihat hukum untuk perkara spesifik. Setiap perkara memiliki fakta dan bukti yang berbeda. Konsultasikan persoalan Anda kepada advokat berlisensi sebelum mengambil tindakan.</div>
+<article style="font-size:17px;line-height:1.85">${a.content.join('')}</article>`;
+const related = FIRM_DATA.articles.filter(x=>x.slug!==a.slug&&x.category===a.category).slice(0,3);
+document.getElementById('related').innerHTML = '<h3 style="margin-bottom:12px">Artikel Terkait</h3>' + (related.length? related.map(r=>`<div class="card" style="margin-bottom:10px"><strong>${r.title}</strong><div class="meta" style="margin:6px 0">${r.excerpt}</div><a href="artikel-detail.html?slug=${r.slug}" style="color:var(--bronze-dark);font-weight:700">Baca →</a></div>`).join('') : '<p class="meta">Belum ada artikel terkait.</p>') +
+`<p class="meta" style="margin-top:12px">Layanan terkait: <a href="bidang-praktik-detail.html?slug=${a.category}">${window.t(window.__PRACTICE_BY_SLUG[a.category].name)}</a></p>`;
+document.getElementById('ctaConsult').href = 'konsultasi.html?bidang=' + a.category;
+document.getElementById('ctaWa').href = window.__WA('Halo Wijaya & Rekan, saya membaca artikel "' + a.title + '" dan ingin bertanya. ');
+lucide.createIcons();
+})();
+</script></body></html>

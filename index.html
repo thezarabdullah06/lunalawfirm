@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beranda | Wijaya &amp; Rekan — Kantor Hukum Jakarta</title>
+<meta name="description" content="Kantor hukum Wijaya & Rekan: pendampingan hukum objektif, transparan, dan terpercaya sejak 2009. Korporasi, litigasi, ketenagakerjaan, keluarga, pertanahan.">
+<link rel="canonical" href="index.html"><link rel="alternate" hreflang="id" href="index.html"><link rel="alternate" hreflang="en" href="index.html?lang=en">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LegalService","name":"Kantor Hukum Wijaya & Rekan","areaServed":"ID","telephone":"+62 21 5080 2288"}</script>
+<script src="https://cdn.tailwindcss.com"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<div id="site-header"></div><main id="main">
+<section class="hero"><div class="wrap">
+<span class="badge"><i data-lucide="shield-check"></i> <span data-i18n="hero.badge">Anggota PERADI Terdaftar</span></span>
+<h1>Pendampingan hukum yang objektif, transparan, dan terpercaya.</h1>
+<p>Sejak 2009, Wijaya &amp; Rekan mendampingi perusahaan dan individu di Jabodetabek dan seluruh Indonesia — tanpa janji kemenangan perkara, hanya evaluasi jujur dan kerja profesional.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+<a class="btn btn-primary" href="konsultasi.html"><i data-lucide="calendar-check"></i> <span data-i18n="hero.btn1">Jadwalkan Konsultasi</span></a>
+<a class="btn btn-light" href="https://wa.me/6281234567890?text=Halo%20Wijaya%20%26%20Rekan%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20hukum." target="_blank" rel="noopener"><i data-lucide="message-circle"></i> <span data-i18n="hero.btn2">Chat WhatsApp</span></a>
+<a class="btn btn-outline" style="color:#fff;border-color:#fff" href="bidang-praktik.html">Lihat Bidang Praktik</a>
+</div></div></section>
+<section class="section"><div class="wrap">
+<p class="eyebrow">Bidang Praktik</p><h2 style="font-size:34px;margin:0 0 6px">Lima bidang, satu standar: kejelasan.</h2>
+<p class="lede">Setiap bidang memiliki ruang lingkup tertulis, ilustrasi kasus anonim, alur kerja, dan FAQ — agar Anda tahu persis apa yang Anda beli.</p>
+<div id="practiceGrid" class="grid g5" style="margin-top:26px"></div>
+</div></section>
+<section style="background:var(--ivory-2)"><div class="wrap section">
+<p class="eyebrow">Keunggulan &amp; Standar Praktik</p><h2>Tiga pilar yang kami pegang</h2>
+<div class="grid g3" style="margin-top:24px">
+<article class="card"><i data-lucide="search-check" style="color:var(--bronze)"></i><h3>Evaluasi Objektif</h3><p class="meta">Kekuatan dan risiko perkara disampaikan apa adanya. Kami tidak memberi janji hasil, sesuai Kode Etik PERADI.</p></article>
+<article class="card"><i data-lucide="receipt-text" style="color:var(--bronze)"></i><h3>Transparansi Biaya</h3><p class="meta">Estimasi tertulis dalam engagement letter sebelum pekerjaan dimulai. Tidak ada biaya tersembunyi.</p></article>
+<article class="card"><i data-lucide="lock" style="color:var(--bronze)"></i><h3>Kerahasiaan Ketat</h3><p class="meta">Seluruh dokumen dijaga di bawah NDA dan Kode Etik Advokat. Dilarang menulis dokumen rahasia sebelum conflict check.</p></article>
+</div>
+<div style="margin-top:20px"><a class="btn btn-navy" href="tentang-kami.html">Tentang Kami <i data-lucide="arrow-right"></i></a></div>
+</div></section>
+<section class="section"><div class="wrap">
+<p class="eyebrow">Sorotan Partner</p><h2>Partner penanggung jawab perkara</h2>
+<div id="partnerGrid" class="grid g3" style="margin-top:24px"></div>
+<div style="margin-top:20px"><a class="btn btn-outline" href="tim-advokat.html">Direktori Lengkap <i data-lucide="arrow-right"></i></a></div>
+</div></section>
+<section style="background:#fff"><div class="wrap section">
+<p class="eyebrow">Artikel Hukum</p><h2>Publikasi terbaru yang ditinjau Partner</h2>
+<div id="articleGrid" class="grid g3" style="margin-top:24px"></div>
+<div style="margin-top:20px;text-align:center"><a class="btn btn-navy" href="artikel.html">Semua Artikel <i data-lucide="arrow-right"></i></a></div>
+</div></section>
+</main><div id="site-footer"></div>
+<script src="assets/data.js"></script><script src="assets/app.js"></script>
+<script>
+(function(){
+const F=window.FIRM_DATA;
+document.getElementById('practiceGrid').innerHTML=F.practices.map(p=>`
+<a href="bidang-praktik-detail.html?slug=${p.slug}" class="card" style="text-decoration:none;display:block">
+<i data-lucide="${p.icon}" style="color:var(--bronze);width:28px;height:28px"></i>
+<h3 style="margin:10px 0 6px;font-size:20px">${window.t(p.name)}</h3><p class="meta" style="font-size:14px">${window.t(p.short)}</p>
+<span style="font-weight:700;color:var(--bronze-dark);font-size:14px">Lihat detail →</span></a>`).join('');
+document.getElementById('partnerGrid').innerHTML=F.lawyers.filter(l=>l.role.includes('Partner')).map(l=>`
+<article class="card"><div style="display:flex;gap:14px;align-items:center"><span class="avatar">${l.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</span><div><strong>${l.name}</strong><div class="meta">${l.role}<br>PERADI ${l.peradi}</div></div></div>
+<p class="meta" style="margin-top:12px">${l.bio}</p><a class="btn btn-navy" style="padding:9px 16px;font-size:14px" href="tim-advokat-detail.html?slug=${l.slug}">${T('view.profile')}</a></article>`).join('');
+document.getElementById('articleGrid').innerHTML=F.articles.slice(0,3).map(a=>`
+<article class="card"><span class="pill review">Ditinjau oleh Partner</span><h3 style="font-size:20px;margin:10px 0 6px">${a.title}</h3><p class="meta">${a.excerpt}</p>
+<div class="meta" style="margin:10px 0">${new Date(a.date).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})} • ${a.read}</div>
+<a class="btn btn-outline" style="padding:9px 16px;font-size:14px" href="artikel-detail.html?slug=${a.slug}">${T('read.more')}</a></article>`).join('');
+lucide.createIcons();
+})();
+</script></body></html>
